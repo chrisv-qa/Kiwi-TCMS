@@ -3,10 +3,10 @@ nav.navbar-default { border-top-color: #3C8D2C; }
 
 .login-pf, .login-pf body {
     background-attachment: fixed;
-    background-image: url("../images/header-pattern.png");
+    background-image: url("../images/background-13.jpg");
     background-position: bottom right;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
 }
 
 
@@ -69,12 +69,17 @@ img {
 }
 
 .property-value a {
-    color: #c00; inherit !important;
+    color: #c00 inherit !important;
 }
 
 a.disabled {
     color: #bbb;
     cursor: default;
     pointer-events: none;
+    text-decoration: none;
+}
+
+a {
+    color: #8fc0da;
     text-decoration: none;
 }
