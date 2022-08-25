@@ -25,7 +25,7 @@ services:
             - 80:8080
             - 443:8443
         volumes:
-            - uploads:/Kiwi_custom/uploads:Z
+            - uploads:/Kiwi-custom/uploads:Z
         environment:
             KIWI_DB_HOST: db
             KIWI_DB_PORT: 3306
