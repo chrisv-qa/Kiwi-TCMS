@@ -63,14 +63,15 @@ ADMINS = [
 # You also need to configure the email backend. For more information see:
 # https://docs.djangoproject.com/en/3.0/topics/email/
 # SERVER_EMAIL is used by the logging backend to send exceptions to ADMINS
-SERVER_EMAIL = DEFAULT_FROM_EMAIL = "kiwi@example.com"
-EMAIL_SUBJECT_PREFIX = "[Kiwi-TCMS] "
+SERVER_EMAIL = DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+EMAIL_SUBJECT_PREFIX = "[Ruah-TCMS] "
 
-#  SMTP specific settings
-#  EMAIL_HOST = 'smtp.example.com'
-#  EMAIL_PORT = 25
-#  EMAIL_HOST_USER = 'smtp_username'
-#  EMAIL_HOST_PASSWORD = 'smtp_password'
+# SMTP specific settings
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
