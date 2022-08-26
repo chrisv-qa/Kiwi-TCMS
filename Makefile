@@ -93,24 +93,24 @@ bandit_site_packages:
 docker-image:
 #	sudo rm -rf dist/
 	docker pull registry.access.redhat.com/ubi8/ubi-minimal
-	docker build -t kiwitcms_custom/buildroot -f Dockerfile.buildroot .
+	docker build -t chrisruah/buildroot -f Dockerfile.buildroot .
 	docker run --rm --security-opt label=disable \
-	            -v 'pwd':/host --entrypoint /bin/cp kiwitcms_custom/buildroot \
-	            -r /Kiwi_custom/dist/ /host/
+	            -v 'pwd':/host --entrypoint /bin/cp chrisruah/buildroot \
+	            -r /Kiwi/dist/ /host/
 	docker run --rm --security-opt label=disable \
-	            -v 'pwd':/host --entrypoint /bin/cp kiwitcms_custom/buildroot \
+	            -v 'pwd':/host --entrypoint /bin/cp chrisruah/buildroot \
 	            -r /venv /host/dist/
-	docker build -t kiwitcms/kiwi:customize .
-	docker tag kiwitcms/kiwi:customize quay.io/kiwitcms/kiwi:customize
+	docker build -t chrisruah/kiwi:customize .
+	docker tag chrisruah/kiwi:customize quay.io/chrisruah/kiwi:customize
 
 
 .PHONY: docker-manifest
 docker-manifest:
 	docker manifest create \
-	    quay.io/kiwitcms/version:$(VERSION) \
-	    quay.io/kiwitcms/version:$(VERSION)-x86_64 \
-	    quay.io/kiwitcms/version:$(VERSION)-aarch64
-	docker manifest push quay.io/kiwitcms/version:$(VERSION)
+	    quay.io/chrisruah/version:$(VERSION) \
+	    quay.io/chrisruah/version:$(VERSION)-x86_64 \
+	    quay.io/chrisruah/version:$(VERSION)-aarch64
+	docker manifest push quay.io/chrisruah/version:$(VERSION)
 
 
 .PHONY: test-docker-image

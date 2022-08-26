@@ -30,25 +30,25 @@ ENV PATH=/venv/bin:${PATH} \
 # this helps keep -devel dependencies outside of this image
 COPY ./dist/venv/ /venv
 
-COPY ./manage.py /Kiwi-custom/
+COPY ./manage.py /Kiwi/
 # create directories so we can properly set ownership for them
-RUN mkdir /Kiwi-custom/ssl /Kiwi-custom/static /Kiwi-custom/uploads
+RUN mkdir /Kiwi/ssl /Kiwi/static /Kiwi/uploads
 # generate self-signed SSL certificate
 RUN /usr/bin/sscg -v -f \
     --country BG --locality Sofia \
     --organization "Kiwi TCMS" \
     --organizational-unit "Quality Engineering" \
-    --ca-file       /Kiwi-custom/static/ca.crt     \
-    --cert-file     /Kiwi-custom/ssl/localhost.crt \
-    --cert-key-file /Kiwi-custom/ssl/localhost.key
-RUN sed -i "s/tcms.settings.devel/tcms.settings.product/" /Kiwi-custom/manage.py && \
-    ln -s /Kiwi-custom/ssl/localhost.crt /etc/pki/tls/certs/localhost.crt && \
-    ln -s /Kiwi-custom/ssl/localhost.key /etc/pki/tls/private/localhost.key
+    --ca-file       /Kiwi/static/ca.crt     \
+    --cert-file     /Kiwi/ssl/localhost.crt \
+    --cert-key-file /Kiwi/ssl/localhost.key
+RUN sed -i "s/tcms.settings.devel/tcms.settings.product/" /Kiwi/manage.py && \
+    ln -s /Kiwi/ssl/localhost.crt /etc/pki/tls/certs/localhost.crt && \
+    ln -s /Kiwi/ssl/localhost.key /etc/pki/tls/private/localhost.key
 
 
 # collect static files
-RUN /Kiwi-custom/manage.py collectstatic --noinput --link
+RUN /Kiwi/manage.py collectstatic --noinput --link
 
 # from now on execute as non-root
-RUN chown -R 1001 /Kiwi-custom/ /venv/
+RUN chown -R 1001 /Kiwi/ /venv/
 USER 1001
